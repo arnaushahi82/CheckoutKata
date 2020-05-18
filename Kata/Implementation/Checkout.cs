@@ -9,7 +9,7 @@ namespace Kata.Implementation
 {
     public class Checkout : ICheckout
     {
-        private List<Item> Items { get; set; }
+        public List<Item> Items { get; set; }
 
         public Checkout()
         {
@@ -40,7 +40,13 @@ namespace Kata.Implementation
 
         public decimal Total()
         {
-           return Items.Sum(x => x.UnitPrice * x.Quantity);
+            IDiscountCalculator calculator = new DiscountCalculator();
+            return Items.Sum(x => calculator.CalculateDiscountedPrice(x));
+        }
+
+        public int TotalItemsScanned()
+        {
+            return Items.Count();
         }
     }
 }

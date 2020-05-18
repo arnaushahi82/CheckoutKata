@@ -22,11 +22,32 @@ namespace Kata.Implementation.Tests
         }
 
         [TestMethod()]
+        public void ScanMultipleItemsTest()
+        {
+            ICheckout checkout = new Checkout();
+            checkout.Scan(new Item() { SKU = "A99", UnitPrice = 0.5m, Quantity = 1 });
+            checkout.Scan(new Item() { SKU = "C40", UnitPrice = 0.6m, Quantity = 1 });
+            checkout.Scan(new Item() { SKU = "A99", UnitPrice = 0.5m, Quantity = 1 });
+            Assert.AreEqual(2, checkout.TotalItemsScanned());
+            
+        }
+
+        [TestMethod()]
         public void TotalTest()
         {
             ICheckout checkout = new Checkout();
             checkout.Scan(new Item() { SKU = "A99", UnitPrice = 0.5m, Quantity = 2 });
             Assert.AreEqual(1.0m, checkout.Total());
+        }
+
+        [TestMethod()]
+        public void TotalWithSpecialOfferTest()
+        {
+            ICheckout checkout = new Checkout();
+            
+            checkout.Scan(new Item(){SKU = "B15", Quantity = 2, UnitPrice = .3m, 
+                Offer = new SpecialOffer(){Quantity = 2, OfferPrice = .45m}});
+            Assert.AreEqual(0.45m, checkout.Total());
         }
     }
 }

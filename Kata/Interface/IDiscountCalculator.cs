@@ -5,10 +5,8 @@ using Kata.Models;
 
 namespace Kata.Interface
 {
-    public interface ICheckout
+    interface IDiscountCalculator
     {
-        void Scan(Item item);
-        decimal Total();
-        int TotalItemsScanned();
+        decimal CalculateDiscountedPrice(Item item);
     }
 }
