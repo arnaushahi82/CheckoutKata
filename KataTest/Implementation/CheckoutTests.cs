@@ -16,15 +16,17 @@ namespace Kata.Implementation.Tests
         [TestMethod()]
         public void ScanTest()
         {
-            var checkout = new Checkout();
+            ICheckout checkout = new Checkout();
             checkout.Scan(new Item() { SKU = "A99", UnitPrice = 0.5m, Quantity = 1 });
-            Assert.AreEqual(1, checkout.Items.Count);
+            Assert.AreEqual(0.5m, checkout.Total());
         }
 
         [TestMethod()]
         public void TotalTest()
         {
-            Assert.Fail();
+            ICheckout checkout = new Checkout();
+            checkout.Scan(new Item() { SKU = "A99", UnitPrice = 0.5m, Quantity = 2 });
+            Assert.AreEqual(1.0m, checkout.Total());
         }
     }
 }
