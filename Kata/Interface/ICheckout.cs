@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Kata.Models;
 
 namespace Kata.Interface
 {
-    interface ICheckout
+    public interface ICheckout
     {
-        void Scan(string item);
+        void Scan(Item item);
         decimal Total(); 
     }
 }
